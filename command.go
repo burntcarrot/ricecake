@@ -243,8 +243,8 @@ func (c *Command) isHidden() bool {
 	return c.hidden
 }
 
-// Hidden hides the command from the help menu.
-func (c *Command) Hidden() {
+// Hide hides the command from the help menu.
+func (c *Command) Hide() {
 	c.hidden = true
 }
 
@@ -262,8 +262,8 @@ func (c *Command) Action(action Action) *Command {
 // Others
 ////////////
 
-// OtherArgs returns the non-flag arguments passed to the command.
-func (c *Command) OtherArgs() []string {
+// ExtraArgs returns the non-flag arguments passed to the command.
+func (c *Command) ExtraArgs() []string {
 	return c.flags.Args()
 }
 

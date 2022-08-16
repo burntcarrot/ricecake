@@ -10,11 +10,13 @@
 
 - Zero dependencies <sup>only uses <a href="https://github.com/spf13/pflag">pflag</a>; based on the standard library</sup>
 - Support for subcommands
-- POSIX-compliant flags
+- POSIX-compliant flags (short/long flag styles)
 - Action-based API (inspired by [urfave/cli](https://github.com/urfave/cli))
 - Init Hook (hook for customizing behavior during CLI initialization)
 - Auto-generated help menu!
 - Custom banners
+- Chainable! (see [example](./examples/chain/))
+- Hide commands (see [example](./examples/hide/))
 - and more!
 
 ## Installation
@@ -26,6 +28,17 @@ import "github.com/burntcarrot/ricecake"
 ```
 
 ## Usage
+
+**A list of examples:**
+
+- [Create a basic CLI with ricecake](./examples/cli/)
+- [CLI with subcommands](./examples/subcommands/)
+- [CLI with flags](./examples/flags/)
+- [CLI built with chaining](./examples/chain/)
+- [Extract extra arguments passed to CLI](./examples/extra/)
+- [Hidden commands](./examples/hide/)
+- [Custom banner](./examples/banner/)
+- [Nested subcommands](./examples/nested/)
 
 Here is an example on using `ricecake` to create CLIs:
 
@@ -64,12 +77,6 @@ func main() {
 	cli.Run()
 }
 ```
-
-A list of examples:
-
-- [Create a basic CLI with ricecake](./examples/cli/)
-- [CLI with subcommands](./examples/subcommands/)
-- coming soon!
 
 ## License
 

@@ -104,7 +104,7 @@ func (c *CLI) Run(args ...string) error {
 }
 
 // Abort returns the given error and terminates the CLI.
-func (c *CLI) Abort(err error) {
+func (*CLI) Abort(err error) {
 	log.Fatal(err)
 	os.Exit(1)
 }
@@ -167,4 +167,13 @@ func (c *CLI) IntFlag(name, description string, variable *int) *CLI {
 func (c *CLI) IntFlagP(name, shorthand, description string, variable *int) *CLI {
 	c.rootCmd.IntFlagP(name, shorthand, description, variable)
 	return c
+}
+
+///////////
+// Others
+///////////
+
+// ExtraArgs returns the non-flag arguments passed to the CLI.
+func (c *CLI) ExtraArgs() []string {
+	return c.rootCmd.ExtraArgs()
 }
