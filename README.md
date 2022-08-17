@@ -37,7 +37,7 @@ import "github.com/burntcarrot/ricecake"
 - [CLI built with chaining](./examples/chain/)
 - [Extract extra arguments passed to CLI](./examples/extra/)
 - [Hidden commands](./examples/hide/)
-- [Custom banner](./examples/banner/)
+- [Custom banners](./examples/banner/)
 - [Nested subcommands](./examples/nested/)
 
 Here is an example on using `ricecake` to create CLIs:
@@ -47,6 +47,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/burntcarrot/ricecake"
 )
@@ -74,7 +75,10 @@ func main() {
 	})
 
 	// Run the CLI.
-	cli.Run()
+	err := cli.Run()
+	if err != nil {
+		log.Fatalf("failed to run CLI; err: %v", err)
+	}
 }
 ```
 

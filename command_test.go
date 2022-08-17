@@ -51,26 +51,42 @@ func TestCommand(t *testing.T) {
 		cli := NewCLI("test", "Test CLI", "v0.1.0")
 		cli.LongDescription("Long description for the test CLI.")
 		// Should default to help menu.
-		cli.Run()
+		err := cli.Run()
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 
 		// Set action.
 		cli.Action(func() error {
 			return nil
 		})
 		// Ensure that the action is being called.
-		cli.Run("test")
+		err = cli.Run("test")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 
 		// Check the help menu.
-		cli.Run("--help")
+		err = cli.Run("--help")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 
 		sub := cli.NewSubCommand("sub", "Subcommand")
 		sub.Action(func() error {
 			return nil
 		})
+
 		// See help menu with newly-added subcommand.
-		cli.Run("--help")
+		err = cli.Run("--help")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 
 		// Run subcommand.
-		cli.Run("test", "sub")
+		err = cli.Run("test", "sub")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 }

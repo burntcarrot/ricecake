@@ -13,7 +13,10 @@ func TestCLI(t *testing.T) {
 		cli.SetInit(func(c *CLI) error {
 			return nil
 		})
-		cli.Run()
+		err := cli.Run()
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 
 	t.Run("SetInit with error", func(t *testing.T) {
@@ -22,7 +25,11 @@ func TestCLI(t *testing.T) {
 		cli.SetInit(func(c *CLI) error {
 			return errors.New("test error")
 		})
-		cli.Run()
+
+		err := cli.Run()
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 
 	t.Run("SetBanner", func(t *testing.T) {
@@ -39,13 +46,21 @@ func TestCLI(t *testing.T) {
 		cli.SetErrorHandler(func(s string, err error) error {
 			return fmt.Errorf("command = %s, encountered error: %v", s, err)
 		})
-		cli.Run("-badflag")
+
+		err := cli.Run("-badflag")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 
 	t.Run("handle error", func(t *testing.T) {
 		cli := NewCLI("test", "Test CLI", "v0.1.0")
 		cli.LongDescription("Long description for the test CLI.")
-		cli.Run("-badflag")
+
+		err := cli.Run("-badflag")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 
 	t.Run("subcommand", func(t *testing.T) {
@@ -56,7 +71,10 @@ func TestCLI(t *testing.T) {
 			return nil
 		})
 
-		cli.Run("test greet")
+		err := cli.Run("test greet")
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 
 	t.Run("default subcommand", func(t *testing.T) {
@@ -69,7 +87,11 @@ func TestCLI(t *testing.T) {
 		cli.DefaultCommand(greet)
 
 		cli.PrintHelp()
-		cli.Run()
+
+		err := cli.Run()
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 
 	t.Run("hidden subcommand", func(t *testing.T) {
@@ -130,6 +152,10 @@ func TestCLI(t *testing.T) {
 			fmt.Printf("extra args: %+v\n", cli.ExtraArgs())
 			return nil
 		})
-		cli.Run()
+
+		err := cli.Run()
+		if err != nil {
+			t.Errorf("test failed, err: %v", err)
+		}
 	})
 }

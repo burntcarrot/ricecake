@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/burntcarrot/ricecake"
 )
@@ -32,5 +33,8 @@ func main() {
 	greet.Hide()
 
 	// Run the CLI.
-	cli.Run()
+	err := cli.Run()
+	if err != nil {
+		log.Fatalf("failed to run CLI; err: %v", err)
+	}
 }
