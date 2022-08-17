@@ -46,4 +46,31 @@ func TestCommand(t *testing.T) {
 			}
 		}
 	})
+
+	t.Run("Run", func(t *testing.T) {
+		cli := NewCLI("test", "Test CLI", "v0.1.0")
+		cli.LongDescription("Long description for the test CLI.")
+		// Should default to help menu.
+		cli.Run()
+
+		// Set action.
+		cli.Action(func() error {
+			return nil
+		})
+		// Ensure that the action is being called.
+		cli.Run("test")
+
+		// Check the help menu.
+		cli.Run("--help")
+
+		sub := cli.NewSubCommand("sub", "Subcommand")
+		sub.Action(func() error {
+			return nil
+		})
+		// See help menu with newly-added subcommand.
+		cli.Run("--help")
+
+		// Run subcommand.
+		cli.Run("test", "sub")
+	})
 }
